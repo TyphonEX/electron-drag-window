@@ -52,8 +52,6 @@ app.whenReady().then(()=> {
 
 ##### 参数
 
-* 第一个参数为 `ipcRenderer.send` ，因为在绝大部分项目中 `ipcRenderer`是由 `preload` 注入，因此这里是由外部传入，而非包内直接引入
-* 第二个参数是 `options` 主要是自定义 忽略（不触发）拖拽窗体事件的元素，支持 `igClassNames` 类名 和 `igTagNames` 标签名
 1. 第一个参数为 `ipcRenderer.send` ，因为在绝大部分项目中 `ipcRenderer`是由 `preload` 注入，因此这里是由外部传入，而非包内直接引入
 2. 第二个参数是 `options` 主要是自定义 忽略（不触发）拖拽窗体事件的元素，支持 `igClassNames` 类名 和 `igTagNames` 标签名
 
@@ -70,5 +68,3 @@ bindDragEvent(IpcRendererSend.originSend, options)
 ##### 注意
 
 该方法是通过绑定 mousedown 事件于 body 上，并通过事件委托的形式去处理，因此单个窗体仅需要初始化一次即可
-
-```
