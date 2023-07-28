@@ -4,6 +4,16 @@
 
 Electron 利用 `-webkit-app-region` 去区分可拖拽和不可拖拽。可拖拽区域会不触发鼠标事件，在一些业务场景下无法满足需求，因此写了该库去替代原方案
 
+### 安装
+
+```
+npm i electron-drag-window
+
+or
+
+yarn add electron-drag-window
+```
+
 ### 实现
 
 几个关键
