@@ -7,7 +7,7 @@ Electron 利用 `-webkit-app-region` 去区分可拖拽和不可拖拽。可拖�
 
 ### 安装
 
-[npm 地址]([https://](https://www.npmjs.com/package/electron-drag-window))
+[npm 地址](https://www.npmjs.com/package/electron-drag-window)
 
 ```javascript
 npm i electron-drag-window
