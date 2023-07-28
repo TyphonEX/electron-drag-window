@@ -1,0 +1,42 @@
+{
+  "name": "electron-drag-window",
+  "author": "TyphonEX",
+  "version": "0.0.1",
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    "./electron": {
+      "import": "./dist/electron.js",
+      "require": "./dist/electron.cjs"
+    },
+    "./renderer": {
+      "import": "./dist/renderer.js",
+      "require": "./dist/renderer.cjs"
+    }
+  },
+  "typesVersions": {
+    "*": {
+      "electron": [
+        "./dist/electron.d.ts"
+      ],
+      "renderer": [
+        "./dist/renderer.d.ts"
+      ]
+    }
+  },
+  "scripts": {
+    "build": "tsc && vite build"
+  },
+  "devDependencies": {
+    "@types/node": "^20.4.5",
+    "typescript": "^5.0.2",
+    "vite": "^4.4.5"
+  },
+  "dependencies": {
+    "electron": "^25.3.2",
+    "glob": "^10.3.3",
+    "vite-plugin-dts": "^3.3.1"
+  }
+}
