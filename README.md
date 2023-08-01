@@ -24,7 +24,7 @@ yarn add electron-drag-window
 
 1. `onmousedown` 事件委托获取鼠标坐标
 2. `requestAnimationFrame` 配合 `ipc` 实时与主进程通讯
-3. `screen.getCursorScreenPoint()` 获取窗体坐标
+3. `screen.getCursorScreenPoint()` 获取鼠标坐标
 4. `win.setPosition` 更改窗体坐标，达到移动窗体的效果
 
 具体实现直接看源码，很简单的
