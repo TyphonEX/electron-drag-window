@@ -5,8 +5,6 @@ export const bindDragEvent = (send: IpcRenderer['send'], options?: ElectronDragW
   const { igClassNames = ['ignoreMove'], igTagNames = ['INPUT'] } = options || {}
 
   let animationId = 0
-  let mouseX = 0
-  let mouseY = 0
   let dragging = false
 
   const onMoveWindow = () => {
@@ -15,7 +13,7 @@ export const bindDragEvent = (send: IpcRenderer['send'], options?: ElectronDragW
       return
     }
 
-    send(ElectronDragWindow.IpcKey.ELECTRON_DRAG_WINDOW, { mouseX, mouseY })
+    send(ElectronDragWindow.IpcKey.ELECTRON_DRAG_WINDOW)
 
     animationId = requestAnimationFrame(onMoveWindow)
   }
@@ -45,16 +43,20 @@ export const bindDragEvent = (send: IpcRenderer['send'], options?: ElectronDragW
       return
     }
 
+    let [mouseX, mouseY] = [e.clientX, e.clientY]
+
+    send(ElectronDragWindow.IpcKey.ELECTRON_DRAG_START, { mouseX, mouseY })
+
     document.addEventListener('mouseup', onMouseUp)
 
     dragging = true
-    mouseX = e.clientX
-    mouseY = e.clientY
 
     requestAnimationFrame(onMoveWindow)
   }
 
+
   const onMouseUp = () => {
+    send(ElectronDragWindow.IpcKey.ELECTRON_DRAG_OVER)
     dragging = false
     document.removeEventListener('mouseup', onMouseUp)
     cancelAnimationFrame(animationId)
