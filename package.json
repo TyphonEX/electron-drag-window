@@ -34,11 +34,11 @@
   "devDependencies": {
     "@types/node": "^20.4.5",
     "typescript": "^5.0.2",
-    "vite": "^4.4.5"
+    "vite": "^4.4.5",
+    "electron": "^25.3.2",
+    "glob": "^10.3.3"
   },
   "dependencies": {
-    "electron": "^25.3.2",
-    "glob": "^10.3.3",
     "vite-plugin-dts": "^3.3.1"
   }
 }
