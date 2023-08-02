@@ -1,7 +1,7 @@
 import { BrowserWindow, ipcMain, screen } from "electron"
 import { ElectronDragWindow } from "./type"
 
-// save draging window size and mouse positon
+// save dragging window size and mouse positon
 const WindownConfigMap = new Map<Electron.IpcMainEvent['processId'], ElectronDragWindow.WindowConfigMapParams>()
 
 const getWindowByProcessId = (processId: Electron.IpcMainEvent['processId']) => BrowserWindow.getAllWindows().find(win => win.webContents.getProcessId() === processId)
