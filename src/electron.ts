@@ -39,11 +39,7 @@ export const onWindowDrag = () => {
       /**
        * reset window size, reason by https://github.com/electron/electron/issues/10862
        */
-      const configSize = WindownConfigMap.get(processId)
-
-      if (!configSize) return
-
-      const { width, height } = configSize
+      const { width, height } = config
 
       win.setSize(width, height)
     }
