@@ -11,6 +11,7 @@ Electron 利用 `-webkit-app-region` 去区分可拖拽和不可拖拽。可拖�
 
 ![悬浮球](https://github.com/TyphonEX/electron-drag-window/assets/49380589/50eef9f0-3382-4172-88be-8f8b43e8cf89)
 
+也可以亲自下载体验一下 [typhon-note-release](https://github.com/TyphonEX/typhon-note-release)
 
 ### 安装
 
