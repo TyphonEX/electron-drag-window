@@ -1,19 +1,19 @@
 # electron-drag-window
 
-### 用于 Electron 在不使用 `-webkit-app-region` 的情况下实现窗体移动
+## 用于 Electron 在不使用 `-webkit-app-region` 的情况下实现窗体移动
 
 Electron 利用 `-webkit-app-region` 去区分可拖拽和不可拖拽。可拖拽区域会不触发鼠标事件，在一些业务场景下无法满足需求，因此写了该库去替代原方案，建议结合 `-webkit-app-region` 一起使用
 
 如果对你有帮助，可以的话给我一个 star 谢谢
 
 
-### 效果展示
+## 效果展示
 
 ![悬浮球](https://github.com/TyphonEX/electron-drag-window/assets/49380589/50eef9f0-3382-4172-88be-8f8b43e8cf89)
 
 也可以亲自下载体验一下 [typhon-note-release](https://github.com/TyphonEX/typhon-note-release)
 
-### 安装
+## 安装
 
 [npm 地址](https://www.npmjs.com/package/electron-drag-window)
 
@@ -25,8 +25,7 @@ or
 yarn add electron-drag-window
 ```
 
-
-### 实现
+## 实现
 
 几个关键
 
@@ -37,9 +36,9 @@ yarn add electron-drag-window
 
 具体实现直接看源码，很简单的
 
-### 使用
+## 使用
 
-#### 主进程 main process
+### 主进程 main process
 
 在你的主进程启动文件中
 
@@ -56,9 +55,9 @@ app.whenReady().then(()=> {
 })
 ```
 
-#### 渲染进程 renderer process
+### 渲染进程 renderer process
 
-##### 参数
+#### 参数
 
 1. 第一个参数为 `ipcRenderer.send` ，因为在绝大部分项目中 `ipcRenderer`是由 `preload` 注入，因此这里是由外部传入，而非包内直接引入
 2. 第二个参数是 `options` 主要是自定义 忽略（不触发）拖拽窗体事件的元素，支持 `igClassNames` 类名 和 `igTagNames` 标签名
