@@ -15,8 +15,6 @@ Electron 利用 `-webkit-app-region` 去区分可拖拽和不可拖拽。可拖�
 
 ## 安装
 
-我回退版本的时候误删了npm包，现在需要24小时后才可以重新发布，当前应该很多缓存的镜像还是可以用的（淘宝之类的，建议先用那些）
-
 [npm 地址](https://www.npmjs.com/package/electron-drag-window)
 
 ```javascript
