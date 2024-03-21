@@ -63,8 +63,18 @@ app.whenReady().then(()=> {
 
 #### 参数
 
-1. 第一个参数为 `ipcRenderer.send` ，因为在绝大部分项目中 `ipcRenderer`是由 `preload` 注入，因此这里是由外部传入，而非包内直接引入
-2. 第二个参数是 `options` 主要是自定义 忽略（不触发）拖拽窗体事件的元素，支持 `igClassNames` 类名 和 `igTagNames` 标签名
+1. `ipcRenderer.send` ，因为在绝大部分项目中 `ipcRenderer`是由 `preload` 注入，因此这里是由外部传入，而非包内直接引入
+2. `options` 自定义选项
+
+##### options
+
+|参数名|类型|是否可选|默认值|作用|
+|-|-|-|-|-|
+|igTagNames|`string[]`|可选|`['INPUT']`|忽略拖拽操作的元素名|
+|dragMode|`ElectronDragWindow.DragMode`|可选|`ElectronDragWindow.DragMode.All`|拖拽元素模式: `All` 全局拖拽; `Appoint` 指定拖拽|
+|appointClassNames|`string[]`|可选|`[]`|`Appoint` 模式下，可拖拽的元素类名|
+|igClassNames|`string[]`|可选|`['ignoreMove']`|`All` 模式下，忽略拖拽操作的元素类名|
+
 
 在你的渲染进程中
 
