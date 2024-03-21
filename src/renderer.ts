@@ -2,7 +2,7 @@ import type { IpcRenderer } from "electron"
 import { ElectronDragWindow } from "./type"
 
 export const bindDragEvent = (send: IpcRenderer['send'], options?: ElectronDragWindow.useMoveWindowOptions) => {
-  const { igClassNames = ['ignoreMove'], igTagNames = ['INPUT'] } = options || {}
+  const { igClassNames = ['ignoreMove'], igTagNames = ['INPUT'], appointClassNames = [], dragMode = ElectronDragWindow.DragMode.All } = options || {}
 
   let animationId = 0
   let dragging = false
@@ -18,16 +18,26 @@ export const bindDragEvent = (send: IpcRenderer['send'], options?: ElectronDragW
     animationId = requestAnimationFrame(onMoveWindow)
   }
 
-  const checkDomIgnore = (dom: HTMLElement): boolean => {
-    let has = igTagNames.includes(dom.tagName)
+  const checkIgTagName = (dom: HTMLElement): boolean => {
+    return igTagNames.includes(dom.tagName)
+  }
 
-    if (has) return has
+  const checkClassNames = (classNames: string[], dom: HTMLElement) => {
+    let has = false
 
     for (const name of dom.classList) {
-      has = igClassNames.includes(name)
+      has = classNames.includes(name)
 
       if (has) break
     }
+
+    return has
+  }
+
+  const checkDomIgnore = (dom: HTMLElement): boolean => {
+    if (checkIgTagName(dom)) return true
+
+    const has = checkClassNames(igClassNames, dom)
 
     if (!has && dom.parentElement) {
       return checkDomIgnore(dom.parentElement)
@@ -36,12 +46,35 @@ export const bindDragEvent = (send: IpcRenderer['send'], options?: ElectronDragW
     return has
   }
 
+  const checkDomAppoint = (dom: HTMLElement): boolean => {
+    if (checkIgTagName(dom)) return false
+
+    const has = checkClassNames(appointClassNames, dom)
+
+    if (!has && dom.parentElement) {
+      return checkDomAppoint(dom.parentElement)
+    }
+
+    return has
+  }
+
   const onMouseDown = (e: MouseEvent) => {
     const dom = e.target as HTMLElement
 
-    if (checkDomIgnore(dom)) {
-      return
+    let isIg = false
+
+    switch (dragMode) {
+      case ElectronDragWindow.DragMode.All: {
+        isIg = checkDomIgnore(dom)
+        break;
+      }
+      case ElectronDragWindow.DragMode.Appoint: {
+        isIg = !checkDomAppoint(dom)
+        break;
+      }
     }
+
+    if (isIg) return
 
     let [mouseX, mouseY] = [e.clientX, e.clientY]
 

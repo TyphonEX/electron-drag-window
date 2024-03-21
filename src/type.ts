@@ -1,7 +1,14 @@
 export namespace ElectronDragWindow {
+  export enum DragMode {
+    All,
+    Appoint
+  }
+
   export interface useMoveWindowOptions {
     igClassNames?: string[]
+    appointClassNames?: string[]
     igTagNames?: Element['tagName'][]
+    dragMode?: DragMode
   }
 
   export enum IpcKey {

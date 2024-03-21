@@ -1,7 +1,7 @@
 {
   "name": "electron-drag-window",
   "author": "TyphonEX",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "type": "module",
   "repository": "https://github.com/TyphonEX/electron-drag-window",
   "license": "MIT",
@@ -16,6 +16,10 @@
     "./renderer": {
       "import": "./dist/renderer.js",
       "require": "./dist/renderer.cjs"
+    },
+    "./type": {
+      "import": "./dist/type.js",
+      "require": "./dist/type.cjs"
     }
   },
   "typesVersions": {
@@ -25,6 +29,9 @@
       ],
       "renderer": [
         "./dist/renderer.d.ts"
+      ],
+      "type": [
+        "./dist/type.d.ts"
       ]
     }
   },
