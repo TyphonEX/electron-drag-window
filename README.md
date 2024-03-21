@@ -13,6 +13,7 @@ Electron 利用 `-webkit-app-region` 去区分可拖拽和不可拖拽。可拖�
 
 也可以亲自下载体验一下 [typhon-note-release](https://github.com/TyphonEX/typhon-note-release)
 
+
 ## 安装
 
 [npm 地址](https://www.npmjs.com/package/electron-drag-window)
@@ -25,6 +26,7 @@ or
 yarn add electron-drag-window
 ```
 
+
 ## 实现
 
 几个关键
@@ -35,6 +37,7 @@ yarn add electron-drag-window
 4. `win.setPosition` 更改窗体坐标，达到移动窗体的效果
 
 具体实现直接看源码，很简单的
+
 
 ## 使用
 
@@ -55,6 +58,7 @@ app.whenReady().then(()=> {
 })
 ```
 
+
 ### 渲染进程 renderer process
 
 #### 参数
@@ -71,6 +75,7 @@ import { bindDragEvent } from "electron-drag-window/renderer"
 bindDragEvent(IpcRendererSend.originSend, options)
 
 ````
+
 
 ##### 注意
 
