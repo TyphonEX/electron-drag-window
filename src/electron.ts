@@ -25,30 +25,54 @@ export const onWindowDrag = () => {
        */
       const { x, y } = screen.getCursorScreenPoint()
 
+      const display = screen.getDisplayNearestPoint({ x, y });
+      const primaryDisplay = screen.getPrimaryDisplay();
+
+      const scaleFactor = primaryDisplay.scaleFactor / display.scaleFactor
+
       const { mouseX, mouseY } = config
 
-      const nextX = x - mouseX
-      const nextY = y - mouseY
+      const scaleMouseX = Math.round(scaleFactor * mouseX)
+      const scaleMouseY = Math.round(scaleFactor * mouseY)
+
+      const nextX = Math.round(x - scaleMouseX)
+      const nextY = Math.round(y - scaleMouseY)
 
       const [oldX, oldY] = win.getPosition()
 
       if ([x, oldX].includes(nextX) && [y, oldY].includes(nextY)) return
 
-      win.setPosition(nextX, nextY)
+      const { width, height } = config
+
+      const scaledWidth = Math.floor(width * scaleFactor);
+      const scaledHeight = Math.floor(height * scaleFactor);
+
+      const lastConfig = {
+        x: nextX,
+        y: nextY,
+        width: scaledWidth,
+        height: scaledHeight
+      }
+
+      let i = 0
+
+      while (i < 5) {
+        win.setBounds(lastConfig, false)
+        i++
+      }
 
       /**
        * reset window size, reason by https://github.com/electron/electron/issues/10862
        */
-      const { width, height } = config
 
-      win.setSize(width, height)
+      // win.setSize(width, height)
     }
   )
 
   // save config
   ipcMain.on(
     ElectronDragWindow.IpcKey.ELECTRON_DRAG_START,
-    function (e, params: ElectronDragWindow.IpcParams[ElectronDragWindow.IpcKey.ELECTRON_DRAG_START]) {
+    function (e, _params: ElectronDragWindow.IpcParams[ElectronDragWindow.IpcKey.ELECTRON_DRAG_START]) {
       const processId = e.processId
 
       const win = getWindowByProcessId(processId)
@@ -57,9 +81,17 @@ export const onWindowDrag = () => {
 
       const [width, height] = win.getSize()
 
-      const { mouseX, mouseY } = params
+      // const { mouseX, mouseY } = params
 
-      WindowConfigMap.set(processId, { width, height, mouseX, mouseY })
+      const [winX, winY] = win.getPosition()
+
+      const { x: mouseX, y: mouseY } = screen.getCursorScreenPoint()
+
+      WindowConfigMap.set(processId, {
+        width, height,
+        mouseX: mouseX - winX,
+        mouseY: mouseY - winY
+      })
     }
   )
 

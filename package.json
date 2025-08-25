@@ -1,10 +1,13 @@
 {
   "name": "electron-drag-window",
   "author": "TyphonEX",
-  "version": "1.0.3",
+  "version": "1.0.6",
   "type": "module",
   "repository": "https://github.com/TyphonEX/electron-drag-window",
   "license": "MIT",
+  "scripts": {
+    "build": "tsc && vite build"
+  },
   "files": [
     "dist"
   ],
@@ -34,9 +37,6 @@
         "./dist/type.d.ts"
       ]
     }
-  },
-  "scripts": {
-    "build": "tsc && vite build"
   },
   "keywords": [
     "electron",
