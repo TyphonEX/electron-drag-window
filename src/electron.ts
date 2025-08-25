@@ -32,11 +32,8 @@ export const onWindowDrag = () => {
 
       const { mouseX, mouseY } = config
 
-      const scaleMouseX = Math.round(scaleFactor * mouseX)
-      const scaleMouseY = Math.round(scaleFactor * mouseY)
-
-      const nextX = Math.round(x - scaleMouseX)
-      const nextY = Math.round(y - scaleMouseY)
+      const nextX = Math.round(x - scaleFactor * mouseX)
+      const nextY = Math.round(y - scaleFactor * mouseY)
 
       const [oldX, oldY] = win.getPosition()
 
@@ -54,12 +51,7 @@ export const onWindowDrag = () => {
         height: scaledHeight
       }
 
-      let i = 0
-
-      while (i < 5) {
-        win.setBounds(lastConfig, false)
-        i++
-      }
+      win.setBounds(lastConfig, false)
 
       /**
        * reset window size, reason by https://github.com/electron/electron/issues/10862
