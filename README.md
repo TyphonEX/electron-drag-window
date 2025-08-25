@@ -90,3 +90,21 @@ bindDragEvent(IpcRendererSend.originSend, options)
 ##### 注意
 
 该方法是通过绑定 mousedown 事件于 body 上，并通过事件委托的形式去处理，因此单个窗体仅需要初始化一次即可
+
+
+## 不同 DPI(例如 125%)下, 拖动时窗体尺寸变大问题
+
+具体可参照 [#10862](https://github.com/electron/electron/issues/10862)
+
+这里有一个最快速简易的修复方法
+```
+if (process.platform === 'win32') {
+    app.commandLine.appendSwitch('force-device-scale-factor', '1')
+}
+
+......
+
+app.whenReady()
+```
+在 whenReady 之前强制比例为 1 即可解决
+
